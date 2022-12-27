@@ -9,7 +9,7 @@ tags:
 
 ## Goal
 
-Create a network-topology-aware scheduler for [[Kubernetes]].
+Create a network-topology-aware scheduler for [Kubernetes](https://kubernetes.io/).
 
 ## Comparable Work
 
@@ -18,6 +18,10 @@ Create a network-topology-aware scheduler for [[Kubernetes]].
 In 2020 a general-purpose [[Topology Aware Scheduling]] algorithm was implemented in the [[Kubernetes Scheduler]].
 
 The original use case focuses on implementing NUMA-aware scheduling and introducing generalized [[Custom Resources]] to provide capacity information to the scheduler.
+
+## Analysis
+
+[[Network Topology Aware Scheduler/index|Network Topology Aware Scheduler]]
 
 ## Target Implementation
 
