@@ -1,3 +1,8 @@
+---
+tags:
+  - Kubernetes
+  - extensible-admission-controllers
+---
 # Mutating Webhooks
 
 ## References
