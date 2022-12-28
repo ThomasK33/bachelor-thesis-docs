@@ -35,7 +35,7 @@ plugins:
   - roamlinks
   - search
   - tags:
-      tags_file: index.md
+      tags_file: tags.md
 
 markdown_extensions:
   - footnotes

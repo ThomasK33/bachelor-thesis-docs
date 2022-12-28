@@ -59,9 +59,9 @@ curl --header "Content-Type: application/json-patch+json" \
 ## Using Resources In Pod Definition
 
 For traffic shaping[^2], Pods require an annotation for ingress[^3] and egress[^4] bandwidth limits and do not utilize the resource specs.
-The [Kubernetes Scheduler|kube-scheduler] only uses the resource request specification for scheduling. Therefore, it ignores the annotations, while the [CNI Bandwidth Limiting] ignores the specified resource requests and only utilizes the annotations for limiting.
+The [[Kubernetes Scheduler|kube-scheduler]] only uses the resource request specification for scheduling. Therefore, it ignores the annotations, while the [[CNI Bandwidth Limiting]] ignores the specified resource requests and only utilizes the annotations for limiting.
 
-In that sense, setting container limits in `spec.containers[*].resources.limits.ingress-bandwidth` or `spec.containers[*].resources.limits.egress-bandwidth` is pointless unless a mutating webhook rewrites the pod definition and setting the required pod's bandwidth annotations based on the limits if no bandwidth related annotations are present.
+In that sense, setting container limits in `spec.containers[*].resources.limits.ingress-bandwidth` or `spec.containers[*].resources.limits.egress-bandwidth` is pointless unless a mutating webhook rewrites the pod definition and sets the required pod's bandwidth annotations based on the limits if no bandwidth related annotations are present.
 
 ```yaml
 apiVersion: v1
