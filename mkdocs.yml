@@ -32,6 +32,7 @@ theme:
         name: Switch to light mode
 
 repo_url: https://github.com/ThomasK33/bachelor-thesis-docs
+edit_uri: edit/main/docs/
 
 plugins:
   - roamlinks
