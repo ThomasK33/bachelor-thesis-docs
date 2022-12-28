@@ -31,6 +31,8 @@ theme:
         icon: material/brightness-4
         name: Switch to light mode
 
+repo_url: https://github.com/ThomasK33/bachelor-thesis-docs
+
 plugins:
   - roamlinks
   - search
