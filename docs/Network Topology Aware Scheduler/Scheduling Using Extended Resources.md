@@ -30,12 +30,12 @@ Set a node's status capacity information by using, e.g.:
 curl --header "Content-Type: application/json-patch+json" \
   --request PATCH \
   --data '[{"op": "add", "path": "/status/capacity/ingress-bandwidth", "value": "1.25e+9"}]' \
-  http://localhost:8001/api/v1/nodes/docker-desktop/status
+  http://localhost:8001/api/v1/nodes/k3d-k3s-default-server-0/status
 
 curl --header "Content-Type: application/json-patch+json" \
   --request PATCH \
   --data '[{"op": "add", "path": "/status/capacity/egress-bandwidth", "value": "1.25e+9"}]' \
-  http://localhost:8001/api/v1/nodes/docker-desktop/status
+  http://localhost:8001/api/v1/nodes/k3d-k3s-default-server-0/status
 ```
 
 (Note: `1.25e+9` is equivalent to `1.25Gbps`.)
@@ -48,12 +48,12 @@ Furthermore, if needed, one could also set a lower allocatable amount:
 curl --header "Content-Type: application/json-patch+json" \
   --request PATCH \
   --data '[{"op": "add", "path": "/status/allocatable/ingress-bandwidth", "value": "1e+9"}]' \
-  http://localhost:8001/api/v1/nodes/docker-desktop/status
+  http://localhost:8001/api/v1/nodes/k3d-k3s-default-server-0/status
 
 curl --header "Content-Type: application/json-patch+json" \
   --request PATCH \
   --data '[{"op": "add", "path": "/status/allocatable/egress-bandwidth", "value": "1e+9"}]' \
-  http://localhost:8001/api/v1/nodes/docker-desktop/status
+  http://localhost:8001/api/v1/nodes/k3d-k3s-default-server-0/status
 ```
 
 ## Using Resources In Pod Definition
@@ -61,7 +61,7 @@ curl --header "Content-Type: application/json-patch+json" \
 For traffic shaping[^2], Pods require an annotation for ingress[^3] and egress[^4] bandwidth limits and do not utilize the resource specs.
 The [[Kubernetes Scheduler|kube-scheduler]] only uses the resource request specification for scheduling. Therefore, it ignores the annotations, while the [[CNI Bandwidth Limiting]] ignores the specified resource requests and only utilizes the annotations for limiting.
 
-In that sense, setting container limits in `spec.containers[*].resources.limits.ingress-bandwidth` or `spec.containers[*].resources.limits.egress-bandwidth` is pointless unless a mutating webhook rewrites the pod definition and sets the required pod's bandwidth annotations based on the limits if no bandwidth related annotations are present.
+In that sense, setting container limits in `spec.containers[*].resources.limits.ingress-bandwidth` or `spec.containers[*].resources.limits.egress-bandwidth` is pointless unless a [[Mutating Webhooks|mutating webhook]] rewrites the pod definition and sets the required pod's bandwidth annotations based on the limits if no bandwidth related annotations are present.
 
 ```yaml
 apiVersion: v1

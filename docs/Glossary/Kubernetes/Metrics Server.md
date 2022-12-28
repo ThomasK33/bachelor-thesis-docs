@@ -19,5 +19,11 @@ tags:
 
 - <https://github.com/kubernetes-sigs/custom-metrics-apiserver>
 
+## Installation
+
+```bash
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+```
+
 [^1]: <https://github.com/kubernetes-sigs/metrics-server>
 [^2]: <https://kubernetes.io/docs/tasks/debug/debug-cluster/resource-metrics-pipeline/>
