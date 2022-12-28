@@ -29,7 +29,7 @@ spec:
   selfSigned: {}
 ```
 
-### SelfSigned CA certificate
+### SelfSigned CA Certificate
 
 In order to setup a self-signed ca certificate, apply the following manifests:
 
