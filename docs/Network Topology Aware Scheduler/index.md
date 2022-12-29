@@ -25,5 +25,5 @@ While static scheduling is feasible to achieve that way, multiple shortcomings b
 - One has to implement a controller updating each node's bandwidth resource capacities and allocatable amounts.
 - As outlined in the pod definition section, the CNI specification does not consider custom resource limits. It would require creating an additional [[Mutating Webhooks||mutating webhook]] that intercepts the creation of a pod resource and sets the annotations accordingly.
 
-Additionally, [[Scheduling Using Extended Resources]] does not allow overcommitting resources and thus cannot take network burst into account and would halt the scheduling of pods onto nodes exceeding their network baseline.
+Additionally, [[Scheduling Using Extended Resources]] does not allow overcommitting resources and thus cannot take network burst into account. Therefore, it would halt the scheduling of pods onto nodes exceeding their network baseline.
 In contrast, pods could still be scheduled on those nodes, bursting the network throughput and returning to the network baseline.

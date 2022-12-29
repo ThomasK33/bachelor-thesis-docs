@@ -153,9 +153,9 @@ tags:
       timeoutSeconds: 5
   ```
 
-- Add network related resources to nodes as outlined in [[Scheduling Using Extended Resources#Adding Network Related Resources To Nodes]]
+- Add network-related resources to nodes as outlined in [[Scheduling Using Extended Resources#Adding Network Related Resources To Nodes]]
 
-- Deploy a test pod using the following manifest and then check if annotations are set accordingly:
+- Deploy a test pod using the following manifest and then check for set annotations:
 
   ```yaml
   apiVersion: v1
