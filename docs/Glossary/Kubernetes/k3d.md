@@ -15,12 +15,20 @@ For installation options, refer to the official k3d documentation: <https://k3d.
 
 ## Usage
 
-### Creation
+### Registry Creation
+
+Create a local registry by uring:
+
+```bash
+k3d registry create default-registry.localhost --port 9090
+```
+
+### Cluster Creation
 
 Create a local development cluster consisting of 3 nodes using:
 
 ```bash
-k3d cluster create default --servers 3 --registry-create default-registry
+k3d cluster create default --servers 3 --registry-use k3d-default-registry.localhost:9090
 ```
 
 This will also setup a k3d-managed registry[^2], yet it requires changes made to the local hosts file[^3].
@@ -31,6 +39,7 @@ Delete a local development cluster by running:
 
 ```bash
 k3d cluster delete default
+k3d registry delete default-registry.localhost
 ```
 
 [^1]: <https://k3d.io/v5.4.6/>

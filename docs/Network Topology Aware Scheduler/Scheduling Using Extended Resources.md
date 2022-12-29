@@ -14,6 +14,10 @@ tags:
 
 One can add networking-related information to a node's ingress and egress capacities and allocatable amounts by utilizing Extended Resources.
 
+## Shortcomings
+
+> **Note:** Extended resources cannot be overcommitted, so request and limit must be equal if both are present in a container spec.[^5]
+
 ## Adding Network Related Resources To Nodes
 
 Create a new shell session, then proxy the api-server to a local port, with authentication already in place:
@@ -29,16 +33,50 @@ Set a node's status capacity information by using, e.g.:
 ```bash
 curl --header "Content-Type: application/json-patch+json" \
   --request PATCH \
-  --data '[{"op": "add", "path": "/status/capacity/ingress-bandwidth", "value": "1.25e+9"}]' \
-  http://localhost:8001/api/v1/nodes/k3d-k3s-default-server-0/status
+  --data '[{"op": "add", "path": "/status/capacity/networking.k8s.io~1ingress-bandwidth", "value": "1.25e+9"}]' \
+  http://localhost:8001/api/v1/nodes/k3d-default-server-0/status
 
 curl --header "Content-Type: application/json-patch+json" \
   --request PATCH \
-  --data '[{"op": "add", "path": "/status/capacity/egress-bandwidth", "value": "1.25e+9"}]' \
-  http://localhost:8001/api/v1/nodes/k3d-k3s-default-server-0/status
+  --data '[{"op": "add", "path": "/status/capacity/networking.k8s.io~1egress-bandwidth", "value": "1.25e+9"}]' \
+  http://localhost:8001/api/v1/nodes/k3d-default-server-0/status
 ```
 
 (Note: `1.25e+9` is equivalent to `1.25Gbps`.)
+
+Applied to a local as outlined in [[k3d#Cluster Creation]]:
+
+```bash
+curl --header "Content-Type: application/json-patch+json" \
+  --request PATCH \
+  --data '[{"op": "add", "path": "/status/capacity/networking.k8s.io~1ingress-bandwidth", "value": "1.25e+9"}]' \
+  http://localhost:8001/api/v1/nodes/k3d-default-server-0/status
+
+curl --header "Content-Type: application/json-patch+json" \
+  --request PATCH \
+  --data '[{"op": "add", "path": "/status/capacity/networking.k8s.io~1egress-bandwidth", "value": "1.25e+9"}]' \
+  http://localhost:8001/api/v1/nodes/k3d-default-server-0/status
+
+curl --header "Content-Type: application/json-patch+json" \
+  --request PATCH \
+  --data '[{"op": "add", "path": "/status/capacity/networking.k8s.io~1ingress-bandwidth", "value": "1.25e+9"}]' \
+  http://localhost:8001/api/v1/nodes/k3d-default-server-1/status
+
+curl --header "Content-Type: application/json-patch+json" \
+  --request PATCH \
+  --data '[{"op": "add", "path": "/status/capacity/networking.k8s.io~1egress-bandwidth", "value": "1.25e+9"}]' \
+  http://localhost:8001/api/v1/nodes/k3d-default-server-1/status
+
+curl --header "Content-Type: application/json-patch+json" \
+  --request PATCH \
+  --data '[{"op": "add", "path": "/status/capacity/networking.k8s.io~1ingress-bandwidth", "value": "1.25e+9"}]' \
+  http://localhost:8001/api/v1/nodes/k3d-default-server-2/status
+
+curl --header "Content-Type: application/json-patch+json" \
+  --request PATCH \
+  --data '[{"op": "add", "path": "/status/capacity/networking.k8s.io~1egress-bandwidth", "value": "1.25e+9"}]' \
+  http://localhost:8001/api/v1/nodes/k3d-default-server-2/status
+```
 
 ### Allocatable Amount Information
 
@@ -47,13 +85,13 @@ Furthermore, if needed, one could also set a lower allocatable amount:
 ```bash
 curl --header "Content-Type: application/json-patch+json" \
   --request PATCH \
-  --data '[{"op": "add", "path": "/status/allocatable/ingress-bandwidth", "value": "1e+9"}]' \
-  http://localhost:8001/api/v1/nodes/k3d-k3s-default-server-0/status
+  --data '[{"op": "add", "path": "/status/allocatable/networking.k8s.io~1ingress-bandwidth", "value": "1e+9"}]' \
+  http://localhost:8001/api/v1/nodes/k3d-default-server-0/status
 
 curl --header "Content-Type: application/json-patch+json" \
   --request PATCH \
-  --data '[{"op": "add", "path": "/status/allocatable/egress-bandwidth", "value": "1e+9"}]' \
-  http://localhost:8001/api/v1/nodes/k3d-k3s-default-server-0/status
+  --data '[{"op": "add", "path": "/status/allocatable/networking.k8s.io~1egress-bandwidth", "value": "1e+9"}]' \
+  http://localhost:8001/api/v1/nodes/k3d-default-server-0/status
 ```
 
 ## Using Resources In Pod Definition
@@ -94,3 +132,4 @@ spec:
 [^2]: <https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/#support-traffic-shaping>
 [^3]: <https://kubernetes.io/docs/reference/labels-annotations-taints/#kubernetes-io-ingress-bandwidth>
 [^4]: <https://kubernetes.io/docs/reference/labels-annotations-taints/#kubernetes-io-egress-bandwidth>
+[^5]: <https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#consuming-extended-resources>

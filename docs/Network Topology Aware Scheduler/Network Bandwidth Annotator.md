@@ -16,12 +16,10 @@ tags:
   # Build the OCI image
   docker build -t networkbandwidthannotator:0.1.0 "."
   # Tag it to use the local k3d managed registry
-  docker tag networkbandwidthannotator:0.1.0 default-registry.localhost:61940/networkbandwidthannotator:0.1.0
+  docker tag networkbandwidthannotator:0.1.0 k3d-default-registry.localhost:9090/networkbandwidthannotator:0.1.0
   # Push it to the local registry
-  docker push default-registry.localhost:61940/networkbandwidthannotator:0.1.0
+  docker push k3d-default-registry.localhost:9090/networkbandwidthannotator:0.1.0
   ```
-
-  Note: The local registry port will change and will require adjustment.
 
 - Deploy annotator using:
 
@@ -91,7 +89,8 @@ tags:
                 value: /certs/tls.crt
               - name: TLS_KEY_FILE
                 value: /certs/tls.key
-            image: default-registry:61940/networkbandwidthannotator:0.1.0
+            image: k3d-default-registry.localhost:9090/networkbandwidthannotator:0.1.0
+            imagePullPolicy: Always
             name: network-bandwidth-annotator
             ports:
               - containerPort: 8443
@@ -156,7 +155,7 @@ tags:
 
 - Add network related resources to nodes as outlined in [[Scheduling Using Extended Resources#Adding Network Related Resources To Nodes]]
 
-- Deploy a test pod using the following:
+- Deploy a test pod using the following manifest and then check if annotations are set accordingly:
 
   ```yaml
   apiVersion: v1
@@ -171,25 +170,21 @@ tags:
   metadata:
     name: my-pod
     namespace: nba-test
-    annotations:
-      # This is necessary because of the way CNI traffic shaping support
-      # currently implements its limits
-      kubernetes.io/ingress-bandwidth: 1M
-      kubernetes.io/egress-bandwidth: 1M
   spec:
     containers:
     - name: my-container
-      image: default-registry:61940/networkbandwidthannotator:0.1.0
+      image: k3d-default-registry.localhost:9090/networkbandwidthannotator:0.1.0
       resources:
         requests:
           cpu: 2
           # if the pod contains ingress and egress bandwidth annotations
           # the requests will be automatically set to the annotations values
-          ingress-bandwidth: 1M
-          egress-bandwidth: 1M
+          networking.k8s.io/ingress-bandwidth: 1M
+          networking.k8s.io/egress-bandwidth: 1M
         limits:
           cpu: 4
-          # Not used by neither the kube-scheduler, nor the CNI
-          ingress-bandwidth: 1M
-          egress-bandwidth: 1M
+          # Limits the ingress bandwidth to 1Mbit/s
+          networking.k8s.io/ingress-bandwidth: 1M
+          # Limits the egress bandwidth to 1Mbit/s
+          networking.k8s.io/egress-bandwidth: 1M
   ```
