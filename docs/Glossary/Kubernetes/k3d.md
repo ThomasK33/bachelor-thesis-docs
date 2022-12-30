@@ -31,7 +31,7 @@ Create a local development cluster consisting of 3 nodes using:
 k3d cluster create default --servers 3 --registry-use k3d-default-registry.localhost:9090
 ```
 
-This will also setup a k3d-managed registry[^2], yet it requires changes made to the local hosts file[^3].
+This requires changes made to the local hosts file[^2].
 
 ### Teardown
 
@@ -43,5 +43,4 @@ k3d registry delete default-registry.localhost
 ```
 
 [^1]: <https://k3d.io/v5.4.6/>
-[^2]: <https://k3d.io/v5.2.1/usage/registries/#using-k3d-managed-registries>
-[^3]: <https://k3d.io/v5.2.1/usage/registries/#preface-referencing-local-registries>
+[^2]: <https://k3d.io/v5.2.1/usage/registries/#preface-referencing-local-registries>
