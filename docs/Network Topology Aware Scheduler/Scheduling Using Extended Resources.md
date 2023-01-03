@@ -14,6 +14,8 @@ tags:
 
 One can add networking-related information to a node's ingress and egress capacities and allocatable amounts by utilizing Extended Resources.
 
+Those can either be added manually, by a controller or using a device plugin.[^6]
+
 ## Shortcomings
 
 > **Note:** Extended resources cannot be overcommitted, so request and limit must be equal if both are present in a container spec.[^5]
@@ -134,3 +136,4 @@ spec:
 [^3]: <https://kubernetes.io/docs/reference/labels-annotations-taints/#kubernetes-io-ingress-bandwidth>
 [^4]: <https://kubernetes.io/docs/reference/labels-annotations-taints/#kubernetes-io-egress-bandwidth>
 [^5]: <https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#consuming-extended-resources>
+[^6]: <https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/>
