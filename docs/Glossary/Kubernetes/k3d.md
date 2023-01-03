@@ -17,7 +17,7 @@ For installation options, refer to the official k3d documentation: <https://k3d.
 
 ### Registry Creation
 
-Create a local registry by uring:
+Create a local registry by using:
 
 ```bash
 k3d registry create default-registry.localhost --port 9090

@@ -6,7 +6,9 @@
 		}
 	],
 	"cSpell.words": [
+		"apiserver",
 		"Gbps",
+		"nbam",
 		"networkbandwidthannotator",
 		"selfsigned"
 	]
