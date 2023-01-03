@@ -50,7 +50,7 @@ Yet, one can usually set CPU and memory limits in helm charts or Kubernetes prim
   spec:
     containers:
     - name: my-container
-      image: k3d-default-registry.localhost:9090/networkbandwidthannotator:0.1.0
+      image: k3d-default-registry.localhost:9090/nbam:latest
       resources:
         requests:
           cpu: 2
