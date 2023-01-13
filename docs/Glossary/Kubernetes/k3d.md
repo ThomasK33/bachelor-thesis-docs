@@ -11,13 +11,13 @@ tags:
 
 ## Installation
 
-For installation options, refer to the official k3d documentation: <https://k3d.io/v5.4.6/#installation>
+For installation options, refer to the official k3d documentation: <https://k3d.io/v5.4.6/#installation>.
 
 ## Usage
 
 ### Registry Creation
 
-Create a local registry by using:
+Create a local registry by using the following:
 
 ```bash
 k3d registry create default-registry.localhost --port 9090
@@ -25,7 +25,7 @@ k3d registry create default-registry.localhost --port 9090
 
 ### Cluster Creation
 
-Create a local development cluster consisting of 3 nodes using:
+Create a local development cluster consisting of 3 nodes using the following:
 
 ```bash
 k3d cluster create default --servers 3 --registry-use k3d-default-registry.localhost:9090
